@@ -19,7 +19,7 @@ st.markdown("""
 
 @st.cache_resource
 def load_model():
-    return joblib.load("Modelos_ml/RandomForest/Models/modelo_random_forest_ampliado.pkl")
+    return joblib.load("Modelos_ml/RandomForest/models/modelo_random_forest_ampliado.pkl")
 
 model = load_model()
 features = model.feature_names_in_  # Lista de 34 columnas

@@ -17,7 +17,7 @@ try:
     # 1. CARGA DEL DATASET AMPLIADO
     # =========================
     log("1. CARGA DEL DATASET AMPLIADO")
-    df = pd.read_csv("Modelos_ML/RandomForest/data/dataset_medico_ampliado.csv")
+    df = pd.read_csv("Modelos_ml/RandomForest/data/dataset_medico_ampliado.csv")
     print(f"✔ Dataset cargado: {df.shape[0]} filas, {df.shape[1]} columnas")
     
     # =========================
@@ -74,13 +74,13 @@ try:
     # 7. GUARDAR MODELO
     # =========================
     log("6. GUARDANDO MODELO")
-    os.makedirs("Modelos_ML/RandomForest/models", exist_ok=True)
-    modelo_path = "Modelos_ML/RandomForest/models/modelo_random_forest_ampliado.pkl"
+    os.makedirs("Modelos_ml/RandomForest/models", exist_ok=True)
+    modelo_path = "Modelos_ml/RandomForest/models/modelo_random_forest_ampliado.pkl"
     joblib.dump(model, modelo_path)
     print(f"💾 Modelo guardado en: {modelo_path}")
     
 except FileNotFoundError:
     log("ERROR")
-    print("❌ No se encontró 'Modelos_ML/RandomForest/data/dataset_medico_ampliado.csv'")
+    print("❌ No se encontró 'Modelos_ml/RandomForest/data/dataset_medico_ampliado.csv'")
     print("👉 Ejecuta primero '1.Crear_Dataset_Mejorado.py'")
     exit(1)
