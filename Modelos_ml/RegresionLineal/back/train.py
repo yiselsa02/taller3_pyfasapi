@@ -2,6 +2,7 @@ import joblib
 import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+import os
 
 
 # Predecir precios de viviendas segun la superficie en m2
@@ -16,14 +17,14 @@ y = np.array([210000000, 300000000, 350000000, 500000000, 600000000, 700000000])
 model = LinearRegression()
 model.fit(x, y)
 
-# #  predicciones de prueba
+# # predicciones de prueba
 # y_pred = model.predict(x)
 
 # # imprimir la informacion del modelo entrenado
 # print("Coeficiente de regresión:", model.coef_[0])
 # print("Término independiente:", model.intercept_)
 
-# #Graficar los datos reales
+# # Graficar los datos reales
 # plt.scatter(x, y, color='red', label='Datos de entrenamiento')
 
 # # Graficar los datos de entrenamiento y la linea de regresion
@@ -37,6 +38,9 @@ model.fit(x, y)
 
 # # imprimir grafica
 # plt.show()
+
+# Crear la carpeta donde se guardará el modelo
+os.makedirs('Modelos_ml/RegresionLineal/models', exist_ok=True)
 
 # Guardar el artefacto del modelo entrenado en un archivo
 joblib.dump(model, 'Modelos_ml/RegresionLineal/models/linear_model.joblib')
