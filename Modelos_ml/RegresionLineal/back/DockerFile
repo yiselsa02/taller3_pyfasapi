@@ -1,0 +1,14 @@
+FROM python:3.10-silm
+
+WORKDIR / app
+COPY requirements.txt .
+RUN piup install --no-cache-dir - r requiremnts.txt
+
+COPY . .
+
+#Entrena y genera el artefacto ne el build
+RUN python train.py
+
+EXPOSE 8000
+
+CMD ["uvicorn" , "main:app" ,"--host","0.0.0.0", "--por", "8000"]
