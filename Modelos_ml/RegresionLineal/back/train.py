@@ -40,7 +40,7 @@ model.fit(x, y)
 # plt.show()
 
 # Crear la carpeta donde se guardará el modelo
-os.makedirs('Modelos_ml/RegresionLineal/models', exist_ok=True)
+os.makedirs('models', exist_ok=True)
 
 # Guardar el artefacto del modelo entrenado en un archivo
-joblib.dump(model, 'Modelos_ml/RegresionLineal/models/linear_model.joblib')
+joblib.dump(model, 'models/linear_model.joblib')
