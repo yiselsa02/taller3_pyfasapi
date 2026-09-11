@@ -190,6 +190,7 @@
         }
 
         @media (max-width: 700px) {
+
             .header h1 {
                 font-size: 28px;
             }
@@ -218,25 +219,37 @@
         </div>
     </header>
 
+
     <main class="container">
 
         <section class="hero">
+
             <h2>Predice el precio de una vivienda</h2>
 
             <p>
                 Ingresa la superficie de la vivienda y obtén
                 un precio estimado mediante regresión lineal.
             </p>
+
         </section>
+
 
         <section class="prediction-card">
 
             <div class="card-header">
+
                 <div>
+
                     <h3>Calculadora de precio</h3>
-                    <p>Ingresa la superficie de la vivienda</p>
+
+                    <p>
+                        Ingresa la superficie de la vivienda
+                    </p>
+
                 </div>
+
             </div>
+
 
             <div class="form-group">
 
@@ -260,13 +273,19 @@
 
             </div>
 
-            <button id="predictButton" onclick="predecirPrecio()">
+
+            <button
+                id="predictButton"
+                onclick="predecirPrecio()"
+            >
                 Calcular precio
             </button>
+
 
             <div id="resultado" class="resultado">
 
                 <div>
+
                     <p class="result-title">
                         Precio estimado
                     </p>
@@ -274,35 +293,59 @@
                     <p class="result-value">
                         Ingresa los metros cuadrados
                     </p>
+
                 </div>
 
             </div>
 
         </section>
 
+
         <section class="info-section">
 
             <div class="info-card">
+
                 <h3>Modelo</h3>
-                <p>Regresión Lineal</p>
+
+                <p>
+                    Regresión Lineal
+                </p>
+
             </div>
 
+
             <div class="info-card">
+
                 <h3>Variable</h3>
-                <p>Superficie en m²</p>
+
+                <p>
+                    Superficie en m²
+                </p>
+
             </div>
 
+
             <div class="info-card">
+
                 <h3>Resultado</h3>
-                <p>Precio estimado</p>
+
+                <p>
+                    Precio estimado
+                </p>
+
             </div>
 
         </section>
 
     </main>
 
+
     <footer>
-        <p>Proyecto de Regresión Lineal · 2026</p>
+
+        <p>
+            Proyecto de Regresión Lineal · 2026
+        </p>
+
     </footer>
 
 
@@ -310,15 +353,23 @@
 
         async function predecirPrecio() {
 
-            const area = document.getElementById("area").value;
+            const areaInput = document.getElementById("area");
             const resultado = document.getElementById("resultado");
             const boton = document.getElementById("predictButton");
 
-            if (!area || area <= 0) {
+            const area = parseFloat(areaInput.value);
+
+
+            // Validar el área
+
+            if (isNaN(area) || area <= 0) {
 
                 resultado.innerHTML = `
                     <div>
-                        <p class="result-title">Error</p>
+                        <p class="result-title">
+                            Error
+                        </p>
+
                         <p class="result-value">
                             Ingresa una superficie válida
                         </p>
@@ -328,34 +379,85 @@
                 return;
             }
 
+
+            // Desactivar botón mientras se procesa
+
             boton.disabled = true;
             boton.textContent = "Calculando...";
 
+
             try {
 
+                /*
+                 * IMPORTANTE:
+                 * Aquí NO llamamos directamente a la API.
+                 *
+                 * Primero enviamos los datos a Django:
+                 *
+                 * HTML
+                 *   ↓
+                 * /predict/
+                 *   ↓
+                 * views.py
+                 *   ↓
+                 * API FastAPI
+                 */
+
                 const response = await fetch("/predict/", {
+
                     method: "POST",
+
                     headers: {
                         "Content-Type": "application/json"
                     },
+
                     body: JSON.stringify({
-                        area: parseFloat(area)
+                        area: area
                     })
+
                 });
+
+
+                /*
+                 * Intentamos obtener la respuesta JSON
+                 */
 
                 const data = await response.json();
 
+
+                /*
+                 * Si Django devuelve un error
+                 */
+
                 if (!response.ok) {
-                    throw new Error(data.error || "Error en la predicción");
+
+                    throw new Error(
+                        data.error ||
+                        data.detail ||
+                        "Error al realizar la predicción"
+                    );
+
                 }
+
+
+                /*
+                 * Obtener el precio devuelto por la API
+                 */
 
                 const precio =
                     data.prediccion ??
                     data.precio ??
                     data.predicted_price;
 
+
+                /*
+                 * Mostrar resultado
+                 */
+
                 resultado.innerHTML = `
+
                     <div>
+
                         <p class="result-title">
                             Precio estimado
                         </p>
@@ -363,24 +465,33 @@
                         <p class="result-value">
                             ${formatearPrecio(precio)}
                         </p>
+
                     </div>
+
                 `;
+
 
             } catch (error) {
 
-                console.error(error);
+                console.error("Error:", error);
+
 
                 resultado.innerHTML = `
+
                     <div>
+
                         <p class="result-title">
                             Error
                         </p>
 
                         <p class="result-value">
-                            No se pudo realizar la predicción
+                            ${error.message}
                         </p>
+
                     </div>
+
                 `;
+
 
             } finally {
 
@@ -388,39 +499,58 @@
                 boton.textContent = "Calcular precio";
 
             }
+
         }
 
+
+        /*
+         * Formatear el precio en pesos colombianos
+         */
 
         function formatearPrecio(precio) {
 
             if (precio === undefined || precio === null) {
+
                 return "Sin resultado";
+
             }
+
 
             if (!isNaN(precio)) {
 
-                return Number(precio).toLocaleString("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                    maximumFractionDigits: 0
-                });
+                return Number(precio).toLocaleString(
+                    "es-CO",
+                    {
+                        style: "currency",
+                        currency: "COP",
+                        maximumFractionDigits: 0
+                    }
+                );
 
             }
 
+
             return precio;
+
         }
 
 
-        document.getElementById("area").addEventListener(
-            "keydown",
-            function(event) {
+        /*
+         * Permitir presionar ENTER
+         * para hacer la predicción
+         */
+
+        document
+            .getElementById("area")
+            .addEventListener("keydown", function(event) {
 
                 if (event.key === "Enter") {
+
                     predecirPrecio();
+
                 }
 
-            }
-        );
+            });
 
     </script>
 

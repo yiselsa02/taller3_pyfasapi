@@ -28,7 +28,7 @@ def predict(request):
                 status=400
             )
 
-        API_URL = "https://taller3pyfasapi-production.up.railway.app/predict/"
+        API_URL = "https://backend-production-5f826.up.railway.app/predict"
 
         response = requests.post(
             API_URL,
