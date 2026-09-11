@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-6rjsu95bno9$d)7^()0vo=k4po-fwu4w0&dwznvvtuc%@t#q*8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://taller3pyml-production-3182.up.railway.app"
+]
 
 # Application definition
 

@@ -19,7 +19,7 @@ function predecirPrecio() {
         <p class="result-title">Calculando...</p>
     `;
 
-    fetch("http://127.0.0.1:8000/predict", {
+    fetch("https://backend-production-5f826.up.railway.app/predict", {
         method: "POST",
 
         headers: {
