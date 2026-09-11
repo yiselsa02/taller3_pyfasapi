@@ -12,4 +12,4 @@ RUN python manage.py migrate
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "gunicorn frontend.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
+CMD ["sh", "-c", "gunicorn frontend.wsgi:application --bind 0.0.0.0:${PORT:-8080}"]
