@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -20,6 +21,7 @@ def predict(request):
 
     try:
         data = json.loads(request.body)
+
         area = float(data.get('area'))
 
         if area <= 0:
@@ -28,16 +30,22 @@ def predict(request):
                 status=400
             )
 
+        # URL de la API
         API_URL = "https://backend-production-5f826.up.railway.app/predict"
 
+        # Enviar el nombre correcto que espera FastAPI
         response = requests.post(
             API_URL,
-            json={'area': area},
+            json={
+                'area_m2': area
+            },
             timeout=30
         )
 
+        resultado = response.json()
+
         return JsonResponse(
-            response.json(),
+            resultado,
             status=response.status_code
         )
 
