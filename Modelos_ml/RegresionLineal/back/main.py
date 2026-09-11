@@ -1,4 +1,5 @@
 import joblib
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 from fastapi import FastAPI, HTTPException # pip install fastapi
 from pydantic import BaseModel, Field # pip install pydantic
@@ -6,6 +7,17 @@ from pydantic import BaseModel, Field # pip install pydantic
 app = FastAPI(title="API de Prediccion de Precios de vivientes",
             description="Prediccion de precios de viviendas según su superficie", 
              version="1.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1:8001",
+        "http://localhost:8001",
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "models/linear_model.joblib"
