@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 import requests
 
 
@@ -7,6 +9,7 @@ def home(request):
     return render(request, 'predictor/index.html')
 
 
+@csrf_exempt
 def predict(request):
 
     if request.method != 'POST':
@@ -16,33 +19,42 @@ def predict(request):
         )
 
     try:
+        data = json.loads(request.body)
+        area = float(data.get('area'))
 
-        data = request.POST
-        area = data.get('area')
-
-        if not area:
+        if area <= 0:
             return JsonResponse(
-                {'error': 'Debes ingresar el área'},
+                {'error': 'El área debe ser mayor que 0'},
                 status=400
             )
 
-        # URL DE TU API
         API_URL = "https://taller3pyfasapi-production.up.railway.app/predict/"
 
         response = requests.post(
             API_URL,
-            json={
-                'area': float(area)
-            }
+            json={'area': area},
+            timeout=30
         )
 
-        resultado = response.json()
-
-        return JsonResponse(resultado, status=response.status_code)
-
-    except Exception as e:
-
         return JsonResponse(
-            {'error': str(e)},
-            status=500
+            response.json(),
+            status=response.status_code
+        )
+
+    except json.JSONDecodeError:
+        return JsonResponse(
+            {'error': 'JSON inválido'},
+            status=400
+        )
+
+    except requests.RequestException as e:
+        return JsonResponse(
+            {'error': f'Error conectando con la API: {str(e)}'},
+            status=502
+        )
+
+    except (TypeError, ValueError):
+        return JsonResponse(
+            {'error': 'El área debe ser un número válido'},
+            status=400
         )
