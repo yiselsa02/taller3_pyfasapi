@@ -1,0 +1,487 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f5f5;
+    color: #292323;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    width: 100%;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8%;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #eadede;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 10;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #c62828;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+
+    color: #625858;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: #c62828;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 520px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 80px 10%;
+
+    background:
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(198, 40, 40, 0.14),
+            transparent 35%
+        ),
+        #f8f5f5;
+}
+
+.hero-text {
+    max-width: 700px;
+}
+
+.etiqueta {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    margin-bottom: 20px;
+
+    border-radius: 30px;
+
+    background: #fbe8e8;
+
+    color: #c62828;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 72px);
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+
+    color: #241d1d;
+}
+
+.hero h1 span {
+    color: #c62828;
+}
+
+.hero p {
+    max-width: 600px;
+
+    color: #756b6b;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    margin-bottom: 35px;
+}
+
+.boton-principal {
+    display: inline-block;
+
+    padding: 14px 25px;
+
+    background: #c62828;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.boton-principal:hover {
+    background: #a91f1f;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   SECCIONES
+========================= */
+
+.seccion-camara,
+.informacion {
+    width: 82%;
+
+    max-width: 1100px;
+
+    margin: 90px auto;
+}
+
+.titulo-seccion {
+    display: flex;
+
+    gap: 20px;
+
+    align-items: flex-start;
+
+    margin-bottom: 35px;
+}
+
+.titulo-seccion > span {
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #c62828;
+
+    padding-top: 6px;
+}
+
+.titulo-seccion h2 {
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+.titulo-seccion p {
+    color: #756b6b;
+}
+
+
+/* =========================
+   CAMARA
+========================= */
+
+.camara-card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 10px 35px rgba(80, 20, 20, 0.08);
+
+    border: 1px solid #eadede;
+}
+
+.video-container {
+    position: relative;
+
+    width: 100%;
+
+    height: 500px;
+
+    background: #171313;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+}
+
+#video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.camara-overlay {
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 14px;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    color: white;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+}
+
+.punto {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #777;
+}
+
+.controles {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 22px;
+}
+
+button {
+    padding: 13px 22px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-iniciar {
+    background: #c62828;
+
+    color: white;
+}
+
+.btn-iniciar:hover {
+    background: #a91f1f;
+}
+
+.btn-detener {
+    background: #f1e9e9;
+
+    color: #4d4444;
+}
+
+.btn-detener:hover {
+    background: #e5d6d6;
+}
+
+
+/* =========================
+   INFORMACION
+========================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.info-card {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    border: 1px solid #eadede;
+
+    transition: 0.2s;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 25px rgba(80, 20, 20, 0.08);
+}
+
+.icono {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background: #fbe8e8;
+
+    color: #c62828;
+
+    font-weight: bold;
+}
+
+.info-card h3 {
+    font-size: 20px;
+
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    color: #756b6b;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 30px 8%;
+
+    background: #281c1c;
+
+    color: white;
+}
+
+footer div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+footer strong {
+    font-size: 20px;
+}
+
+footer span,
+footer p {
+    color: #b9aaaa;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    header {
+        padding: 0 5%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 60px 7%;
+    }
+
+    .seccion-camara,
+    .informacion {
+        width: 90%;
+    }
+
+    .video-container {
+        height: 350px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        flex-direction: column;
+
+        gap: 20px;
+
+        text-align: center;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .video-container {
+        height: 280px;
+    }
+
+    .controles {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+

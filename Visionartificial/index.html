@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VisionArt - Detección Facial</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            VisionArt
+        </div>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#camara">Cámara</a>
+            <a href="#informacion">Información</a>
+        </nav>
+
+    </header>
+
+
+    <main id="inicio">
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <span class="etiqueta">
+                    VISIÓN ARTIFICIAL
+                </span>
+
+                <h1>
+                    Detección facial
+                    <br>
+                    <span>en tiempo real</span>
+                </h1>
+
+                <p>
+                    Sistema desarrollado con Python y OpenCV
+                    para detectar rostros mediante la cámara.
+                </p>
+
+                <a href="#camara" class="boton-principal">
+                    Probar cámara
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <section id="camara" class="seccion-camara">
+
+            <div class="titulo-seccion">
+
+                <span>01</span>
+
+                <div>
+                    <h2>Cámara</h2>
+
+                    <p>
+                        Activa la cámara para comenzar la detección.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="camara-card">
+
+                <div class="video-container">
+
+                    <img id="video" src="" alt="Cámara de detección facial">
+
+                    <div class="camara-overlay">
+
+                        <span class="punto"></span>
+
+                        <span id="estado">
+                            Cámara detenida
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="controles">
+
+                    <button id="iniciar" class="btn-iniciar">
+                        Iniciar cámara
+                    </button>
+
+                    <button id="detener" class="btn-detener">
+                        Detener cámara
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="informacion" class="informacion">
+
+            <div class="titulo-seccion">
+
+                <span>02</span>
+
+                <div>
+                    <h2>Sobre el proyecto</h2>
+
+                    <p>
+                        Tecnologías utilizadas en el sistema.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="info-card">
+
+                    <div class="icono">
+                        PY
+                    </div>
+
+                    <h3>Python</h3>
+
+                    <p>
+                        Lenguaje utilizado para procesar
+                        el video y ejecutar la detección.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="icono">
+                        CV
+                    </div>
+
+                    <h3>OpenCV</h3>
+
+                    <p>
+                        Biblioteca utilizada para analizar
+                        los fotogramas de la cámara.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="icono">
+                        AI
+                    </div>
+
+                    <h3>Visión Artificial</h3>
+
+                    <p>
+                        Tecnología utilizada para localizar
+                        rostros en tiempo real.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div>
+            <strong>VisionArt</strong>
+            <span>Proyecto de Visión Artificial</span>
+        </div>
+
+        <p>
+            Desarrollado con Python + OpenCV
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
