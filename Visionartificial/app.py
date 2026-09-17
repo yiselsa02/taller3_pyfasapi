@@ -1,6 +1,7 @@
 import cv2
 from flask import Flask, render_template, Response
 
+
 app = Flask(
     __name__,
     template_folder=".",
@@ -8,19 +9,33 @@ app = Flask(
     static_url_path=""
 )
 
-# Cargar el clasificador Haar Cascade
+
+# =========================
+# CARGAR CLASIFICADOR
+# =========================
+
 face_cascade = cv2.CascadeClassifier(
     "haarcascade_frontalface_default.xml"
 )
 
-# Acceder a la cámara
+
+# =========================
+# ABRIR CÁMARA
+# =========================
+
 video_captura = cv2.VideoCapture(0)
 
 
-# Funcion para detectar rostro
+# =========================
+# DETECTAR ROSTROS
+# =========================
+
 def detect_bounding_box(vid):
 
-    gray_img = cv2.cvtColor(vid, cv2.COLOR_BGR2GRAY)
+    gray_img = cv2.cvtColor(
+        vid,
+        cv2.COLOR_BGR2GRAY
+    )
 
     face = face_cascade.detectMultiScale(
         gray_img,
@@ -42,7 +57,10 @@ def detect_bounding_box(vid):
     return face
 
 
-# Generar los fotogramas
+# =========================
+# GENERAR VIDEO
+# =========================
+
 def generate_frames():
 
     while True:
@@ -52,14 +70,37 @@ def generate_frames():
         if result is False:
             break
 
-        faces = detect_bounding_box(video_frame)
 
-        ret, buffer = cv2.imencode(".jpg", video_frame)
+        # DETECCIÓN
+        faces = detect_bounding_box(
+            video_frame
+        )
+
+
+        # Mostrar cantidad de rostros
+        cv2.putText(
+            video_frame,
+            f"Rostros: {len(faces)}",
+            (20, 40),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1,
+            (255, 0, 0),
+            2
+        )
+
+
+        # Convertir frame a JPG
+        ret, buffer = cv2.imencode(
+            ".jpg",
+            video_frame
+        )
 
         if not ret:
             continue
 
+
         frame = buffer.tobytes()
+
 
         yield (
             b"--frame\r\n"
@@ -69,14 +110,22 @@ def generate_frames():
         )
 
 
-# Página principal
+# =========================
+# PÁGINA PRINCIPAL
+# =========================
+
 @app.route("/")
 def index():
 
-    return render_template("index.html")
+    return render_template(
+        "index.html"
+    )
 
 
-# Cámara
+# =========================
+# VIDEO
+# =========================
+
 @app.route("/video_feed")
 def video_feed():
 
@@ -86,6 +135,12 @@ def video_feed():
     )
 
 
+# =========================
+# EJECUTAR SERVIDOR
+# =========================
+
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run(
+        debug=True
+    )

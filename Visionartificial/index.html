@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,15 +5,29 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>VisionArt - Detección Facial</title>
+    <title>
+        VisionArt - Detector de Rostros
+    </title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
 
 </head>
 
+
 <body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header>
 
@@ -22,186 +35,353 @@
             VisionArt
         </div>
 
+
         <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#camara">Cámara</a>
-            <a href="#informacion">Información</a>
+
+            <a href="#inicio">
+                Inicio
+            </a>
+
+            <a href="#detector">
+                Detector
+            </a>
+
+            <a href="#informacion">
+                Información
+            </a>
+
         </nav>
 
     </header>
 
 
-    <main id="inicio">
 
-        <section class="hero">
+    <!-- =========================
+         INICIO
+    ========================== -->
 
-            <div class="hero-text">
+    <section
+        id="inicio"
+        class="hero"
+    >
 
-                <span class="etiqueta">
-                    VISIÓN ARTIFICIAL
+        <div>
+
+            <span class="tag">
+                VISIÓN ARTIFICIAL
+            </span>
+
+
+            <h1>
+
+                Detector de
+
+                <span>
+                    Rostros
                 </span>
 
-                <h1>
-                    Detección facial
-                    <br>
-                    <span>en tiempo real</span>
-                </h1>
+            </h1>
+
+
+            <p>
+
+                Sistema de detección facial
+                desarrollado con Python,
+                OpenCV y visión artificial.
+
+            </p>
+
+
+            <a
+                href="#detector"
+                class="btn"
+            >
+                Probar detector
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         DETECTOR
+    ========================== -->
+
+    <section
+        id="detector"
+        class="section"
+    >
+
+        <div class="section-title">
+
+            <span>
+                01
+            </span>
+
+            <h2>
+                Detector de rostros
+            </h2>
+
+        </div>
+
+
+        <p class="description">
+
+            Activa el detector para utilizar
+            la cámara y reconocer rostros
+            en tiempo real.
+
+        </p>
+
+
+
+        <div class="camera-container">
+
+
+            <div class="camera">
+
+                <img
+                    id="video"
+                    src=""
+                    alt="Cámara"
+                >
+
+
+                <div
+                    id="mensaje"
+                    class="camera-message"
+                >
+
+                    Presiona
+                    "Iniciar cámara"
+
+                </div>
+
+            </div>
+
+
+
+            <div class="buttons">
+
+                <button
+                    id="iniciar"
+                >
+                    Iniciar cámara
+                </button>
+
+
+                <button
+                    id="detener"
+                    class="secondary"
+                >
+                    Detener cámara
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         INFORMACIÓN
+    ========================== -->
+
+    <section
+        id="informacion"
+        class="section"
+    >
+
+        <div class="section-title">
+
+            <span>
+                02
+            </span>
+
+            <h2>
+                ¿Cómo funciona?
+            </h2>
+
+        </div>
+
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <span class="number">
+                    01
+                </span>
+
+                <h3>
+                    Cámara
+                </h3>
 
                 <p>
-                    Sistema desarrollado con Python y OpenCV
-                    para detectar rostros mediante la cámara.
+
+                    Python obtiene el video
+                    desde la cámara del
+                    computador.
+
                 </p>
 
-                <a href="#camara" class="boton-principal">
-                    Probar cámara
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <section id="camara" class="seccion-camara">
-
-            <div class="titulo-seccion">
-
-                <span>01</span>
-
-                <div>
-                    <h2>Cámara</h2>
-
-                    <p>
-                        Activa la cámara para comenzar la detección.
-                    </p>
-                </div>
-
             </div>
 
 
-            <div class="camara-card">
 
-                <div class="video-container">
+            <div class="card">
 
-                    <img id="video" src="" alt="Cámara de detección facial">
+                <span class="number">
+                    02
+                </span>
 
-                    <div class="camara-overlay">
+                <h3>
+                    OpenCV
+                </h3>
 
-                        <span class="punto"></span>
+                <p>
 
-                        <span id="estado">
-                            Cámara detenida
-                        </span>
+                    OpenCV procesa cada
+                    fotograma del video
+                    en tiempo real.
 
-                    </div>
-
-                </div>
-
-
-                <div class="controles">
-
-                    <button id="iniciar" class="btn-iniciar">
-                        Iniciar cámara
-                    </button>
-
-                    <button id="detener" class="btn-detener">
-                        Detener cámara
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <section id="informacion" class="informacion">
-
-            <div class="titulo-seccion">
-
-                <span>02</span>
-
-                <div>
-                    <h2>Sobre el proyecto</h2>
-
-                    <p>
-                        Tecnologías utilizadas en el sistema.
-                    </p>
-                </div>
+                </p>
 
             </div>
 
 
-            <div class="cards">
 
-                <div class="info-card">
+            <div class="card">
 
-                    <div class="icono">
-                        PY
-                    </div>
+                <span class="number">
+                    03
+                </span>
 
-                    <h3>Python</h3>
+                <h3>
+                    Detección
+                </h3>
 
-                    <p>
-                        Lenguaje utilizado para procesar
-                        el video y ejecutar la detección.
-                    </p>
+                <p>
 
-                </div>
+                    El clasificador Haar
+                    identifica los rostros
+                    y dibuja un recuadro.
 
-
-                <div class="info-card">
-
-                    <div class="icono">
-                        CV
-                    </div>
-
-                    <h3>OpenCV</h3>
-
-                    <p>
-                        Biblioteca utilizada para analizar
-                        los fotogramas de la cámara.
-                    </p>
-
-                </div>
-
-
-                <div class="info-card">
-
-                    <div class="icono">
-                        AI
-                    </div>
-
-                    <h3>Visión Artificial</h3>
-
-                    <p>
-                        Tecnología utilizada para localizar
-                        rostros en tiempo real.
-                    </p>
-
-                </div>
+                </p>
 
             </div>
 
-        </section>
 
-    </main>
+        </div>
 
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer>
 
         <div>
-            <strong>VisionArt</strong>
-            <span>Proyecto de Visión Artificial</span>
+
+            <strong>
+                VisionArt
+            </strong>
+
+            <p>
+                Proyecto de visión artificial
+            </p>
+
         </div>
 
-        <p>
-            Desarrollado con Python + OpenCV
-        </p>
+
+        <div>
+            Python + OpenCV
+        </div>
 
     </footer>
 
 
-    <script src="script.js"></script>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const video =
+            document.getElementById("video");
+
+        const iniciar =
+            document.getElementById("iniciar");
+
+        const detener =
+            document.getElementById("detener");
+
+        const mensaje =
+            document.getElementById("mensaje");
+
+
+        iniciar.addEventListener(
+            "click",
+            () => {
+
+                video.src =
+                    "/video_feed";
+
+
+                mensaje.style.display =
+                    "none";
+
+
+                iniciar.disabled =
+                    true;
+
+
+                detener.disabled =
+                    false;
+
+            }
+        );
+
+
+        detener.addEventListener(
+            "click",
+            () => {
+
+                video.src =
+                    "";
+
+
+                mensaje.style.display =
+                    "flex";
+
+
+                iniciar.disabled =
+                    false;
+
+
+                detener.disabled =
+                    true;
+
+            }
+        );
+
+
+        detener.disabled =
+            true;
+
+    </script>
+
 
 </body>
 

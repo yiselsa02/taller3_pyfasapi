@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Vision AI | Detector de Rostros</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header class="main-header">
+
+    <div class="header-glow"></div>
+
+    <div class="container">
+
+        <div class="header-content">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <h1>
+                        Vision AI
+                    </h1>
+
+                    <p>
+                        Sistema inteligente de detección facial
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                Sistema activo
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main class="container main-content">
+
+
+<!-- ==========================================
+     INTRO
+========================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-badge">
+        OPENCV · HAAR CASCADE
+    </div>
+
+    <h2>
+        Detector de rostros
+    </h2>
+
+    <p>
+        Analiza imágenes y utiliza la cámara para
+        detectar rostros automáticamente.
+    </p>
+
+</section>
+
+
+
+<!-- ==========================================
+     SELECTOR DE MODO
+========================================== -->
+
+<div class="mode-switch">
+
+    <button
+        id="btnModeUpload"
+        class="mode-button active"
+        type="button"
+    >
+
+        <span>▣</span>
+
+        Imagen
+
+    </button>
+
+
+    <button
+        id="btnModeCamera"
+        class="mode-button"
+        type="button"
+    >
+
+        <span>◉</span>
+
+        Cámara
+
+    </button>
+
+</div>
+
+
+
+<!-- ==========================================
+     SUBIR IMAGEN
+========================================== -->
+
+<section
+    id="sectionUpload"
+    class="main-card"
+>
+
+    <div class="card-header">
+
+        <div>
+
+            <span class="section-number">
+                01
+            </span>
+
+            <h3>
+                Analizar imagen
+            </h3>
+
+            <p>
+                Selecciona una fotografía para detectar
+                los rostros presentes.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="dropZone"
+        class="drop-zone"
+    >
+
+        <div class="drop-icon">
+            ↑
+        </div>
+
+        <h4>
+            Selecciona una imagen
+        </h4>
+
+        <p>
+            Arrastra una imagen aquí o haz clic para buscarla
+        </p>
+
+        <span class="supported">
+            JPG · PNG · WEBP
+        </span>
+
+
+        <input
+            id="fileInput"
+            class="drop-zone-input"
+            type="file"
+            accept="image/*"
+        >
+
+    </div>
+
+
+
+    <div
+        id="boxOriginal"
+        class="image-section d-none"
+    >
+
+        <div class="result-title">
+            <span></span>
+            Imagen original
+        </div>
+
+
+        <div class="image-container">
+
+            <img
+                id="imgOriginal"
+                class="result-image"
+                alt="Imagen original"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <div class="action-area">
+
+        <button
+            id="btnProcess"
+            class="primary-button"
+            type="button"
+            disabled
+        >
+
+            Detectar rostros
+
+            <span>→</span>
+
+        </button>
+
+    </div>
+
+
+
+    <div
+        id="uploadResult"
+        class="image-section d-none"
+    >
+
+        <div class="result-title">
+
+            <span></span>
+
+            Detección de caras
+
+        </div>
+
+
+        <div class="image-container">
+
+            <img
+                id="imgResult"
+                class="result-image"
+                alt="Resultado de detección"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     CÁMARA
+========================================== -->
+
+<section
+    id="sectionCamera"
+    class="main-card camera-card d-none"
+>
+
+
+    <div class="card-header">
+
+        <div>
+
+            <span class="section-number">
+                02
+            </span>
+
+            <h3>
+                Detección en cámara
+            </h3>
+
+            <p>
+                Activa tu cámara para detectar rostros
+                en tiempo real.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="camera-grid">
+
+
+        <!-- CÁMARA -->
+
+        <div class="camera-column">
+
+            <div class="panel-label">
+
+                <span class="live-dot"></span>
+
+                CÁMARA EN VIVO
+
+            </div>
+
+
+            <div class="camera-container">
+
+                <video
+                    id="webcam"
+                    autoplay
+                    playsinline
+                    muted
+                ></video>
+
+            </div>
+
+
+            <canvas
+                id="canvasFrame"
+                width="400"
+                height="300"
+                class="hidden-canvas"
+            ></canvas>
+
+
+            <div class="camera-buttons">
+
+                <button
+                    id="btnStartCamera"
+                    class="primary-button"
+                    type="button"
+                >
+                    Iniciar cámara
+                </button>
+
+
+                <button
+                    id="btnStopCamera"
+                    class="secondary-button"
+                    type="button"
+                    disabled
+                >
+                    Detener
+                </button>
+
+
+                <button
+                    id="btnToggleCamera"
+                    class="secondary-button"
+                    type="button"
+                    style="display:none;"
+                >
+                    Cambiar cámara
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESULTADO -->
+
+        <div class="camera-column">
+
+            <div class="panel-label">
+
+                <span class="scan-dot"></span>
+
+                RESULTADO DE DETECCIÓN
+
+            </div>
+
+
+            <div class="camera-result">
+
+                <img
+                    id="cameraResult"
+                    class="camera-result-image d-none"
+                    alt="Detección"
+                >
+
+
+                <div
+                    id="cameraPlaceholder"
+                    class="camera-placeholder"
+                >
+
+                    <div class="placeholder-symbol">
+                        ◎
+                    </div>
+
+                    <h4>
+                        Esperando detección
+                    </h4>
+
+                    <p>
+                        El resultado aparecerá aquí
+                        cuando se encuentre un rostro.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="counter-card">
+
+                <div>
+
+                    <span class="counter-label">
+                        ROSTROS DETECTADOS
+                    </span>
+
+                    <strong id="cameraFaceCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="counter-icon">
+                    ◉
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     LOADER
+========================================== -->
+
+<div
+    id="loader"
+    class="loader-container d-none"
+>
+
+    <div class="loader"></div>
+
+    <p>
+        Analizando imagen...
+    </p>
+
+</div>
+
+
+
+<!-- ==========================================
+     MÉTRICAS
+========================================== -->
+
+<section
+    id="metricsZone"
+    class="metrics-card d-none"
+>
+
+    <span>
+        RESULTADO DEL ANÁLISIS
+    </span>
+
+    <strong id="faceCount">
+        0
+    </strong>
+
+    <p>
+        rostros encontrados
+    </p>
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+    <div>
+        VISION AI
+    </div>
+
+    <p>
+        Detección facial mediante OpenCV
+    </p>
+
+</footer>
+
+
+
+<script src="/script.js"></script>
+
+</body>
+</html>
